@@ -5,215 +5,359 @@
     <title>Weron Tarot – Digitala tarotläsningar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
+        :root {
+            --bg: #05030a;
+            --bg-card: rgba(15, 10, 30, 0.96);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --accent: #ff91ff;
+            --accent-strong: #ff4b8a;
+            --text-main: #f5f5f5;
+            --text-soft: #c7c7d9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #05030a;
-            color: #f5f5f5;
+            background: radial-gradient(circle at top, #2c124d 0, #05030a 40%, #020109 100%);
+            color: var(--text-main);
         }
+
         header {
-            padding: 3rem 1.5rem;
+            padding: 2.8rem 1.5rem 1.8rem;
             text-align: center;
-            background: radial-gradient(circle at top, #5b2b82, #05030a 60%);
         }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-soft);
+            background: rgba(5, 3, 12, 0.7);
+        }
+
         h1 {
-            margin: 0 0 0.5rem;
-            font-size: 2.4rem;
-            letter-spacing: 0.08em;
+            margin: 0.9rem 0 0.2rem;
+            font-size: 2.1rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
-        h2 {
-            margin-top: 2.5rem;
-            font-size: 1.6rem;
-        }
-        p {
-            line-height: 1.6;
-        }
+
         .tagline {
-            font-size: 1rem;
-            opacity: 0.85;
+            margin: 0;
+            font-size: 0.98rem;
+            color: var(--text-soft);
         }
+
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
+            padding: 0 1rem 3rem;
         }
+
+        .pill-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 0.5rem;
+            padding: 0.4rem 0.2rem 0.8rem;
+            margin: 0 auto 0.7rem;
+            max-width: 520px;
+            scrollbar-width: none;
+        }
+        .pill-nav::-webkit-scrollbar { display: none; }
+
+        .pill-nav button {
+            border: none;
+            background: rgba(15, 10, 30, 0.9);
+            color: var(--text-soft);
+            border-radius: 999px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .pill-nav button.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #05030a;
+            font-weight: 600;
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 1.5rem 1.7rem;
-            margin-top: 1.5rem;
-            backdrop-filter: blur(6px);
+            background: var(--bg-card);
+            border-radius: 18px;
+            border: 1px solid var(--border-card);
+            padding: 1.4rem 1.4rem 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
         }
-        .card h3 {
-            margin-top: 0;
+
+        .card h2 {
+            margin: 0 0 0.6rem;
             font-size: 1.25rem;
         }
+
+        p {
+            line-height: 1.6;
+            font-size: 0.96rem;
+            color: var(--text-soft);
+        }
+
         .services-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0.3rem 0 0.8rem;
         }
+
         .services-list li {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 0.6rem 0;
-            gap: 1rem;
+            gap: 0.8rem;
+            padding: 0.55rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            font-size: 0.95rem;
         }
-        .services-list li span:first-child {
+
+        .services-list li:last-child {
+            border-bottom: none;
+        }
+
+        .services-list span:first-child {
+            color: var(--text-main);
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        ol {
+            padding-left: 1.1rem;
+            margin: 0.3rem 0 0.2rem;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+        }
+
+        ol li {
+            margin-bottom: 0.4rem;
+        }
+
+        ul {
+            padding-left: 1.1rem;
+            margin: 0.25rem 0 0.4rem;
+        }
+
+        .highlight {
+            color: var(--accent);
             font-weight: 500;
         }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.6rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            opacity: 0.9;
+
+        .inline-label {
+            font-weight: 500;
+            color: var(--text-main);
         }
-        .cta-box {
-            text-align: center;
-            margin-top: 2rem;
+
+        .cta-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
         }
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 1.6rem;
+
+        .btn-primary,
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.85rem 1.2rem;
             border-radius: 999px;
-            border: none;
-            background: linear-gradient(135deg, #c94bff, #ff4b8a);
-            color: #05030a;
-            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            text-decoration: none;
-            font-size: 0.9rem;
+            border: 1px solid transparent;
         }
-        .btn:hover {
-            filter: brightness(1.08);
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: #05030a;
+            font-weight: 600;
         }
-        .highlight {
-            color: #ff91ff;
+
+        .btn-ghost {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.25);
+            color: var(--text-soft);
         }
+
+        .btn-primary:hover,
+        .btn-ghost:hover {
+            filter: brightness(1.07);
+        }
+
+        small {
+            font-size: 0.82rem;
+            color: var(--text-soft);
+        }
+
         footer {
             text-align: center;
             font-size: 0.8rem;
-            opacity: 0.65;
-            padding: 1.5rem;
+            color: rgba(230, 230, 255, 0.7);
+            padding: 1.6rem 1rem 2rem;
         }
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .card { padding: 1.2rem 1.3rem; }
+
+        @media (min-width: 720px) {
+            header {
+                padding-bottom: 2.4rem;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            .layout-two {
+                display: grid;
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
 <header>
-    <div class="badge">Digital tarot</div>
+    <div class="badge">Digital tarot · Online</div>
     <h1>Weron Tarot</h1>
-    <p class="tagline">Intuitiv digital tarotläsning – rakt, ärligt och utan bullshit.</p>
+    <p class="tagline">Intuitiv tarotläsning i text – rakt, ärligt och utan sockrat fluff.</p>
+
+    <div class="pill-nav" aria-hidden="true">
+        <button class="active">Översikt</button>
+        <button>Tjänster</button>
+        <button>Betalning</button>
+        <button>Bokning</button>
+        <button>Viktigt</button>
+    </div>
 </header>
 
 <main class="container">
 
     <section class="card">
-        <h3>Om mig</h3>
+        <h2>Om Weron Tarot</h2>
         <p>
             Jag heter Weronika och arbetar med digitala tarotläsningar. 
-            Jag blandar intuition, symbolik och rak kommunikation för att hjälpa dig att se 
-            ditt läge tydligare – utan sockrad spirituell fluff.
+            Jag använder kortens symbolik, intuition och rak kommunikation för att hjälpa dig 
+            att se ditt läge tydligare – utan att lova mirakel eller saga-slut.
         </p>
         <p>
-            Alla läsningar ges skriftligt online, så att du kan läsa i lugn och ro 
+            Alla läsningar görs på distans och levereras skriftligt, så att du kan läsa i lugn och ro 
             när det passar dig.
         </p>
     </section>
 
     <section class="card">
-        <h3>Tjänster & priser</h3>
+        <h2>Tjänster & priser</h2>
         <ul class="services-list">
             <li>
-                <span>1 fråga / 1 kort</span>
-                <span>49 kr</span>
+                <span>1 fråga · 1 kort</span>
+                <span class="price">49 kr</span>
             </li>
             <li>
                 <span>3 kort – då / nu / riktning</span>
-                <span>99 kr</span>
+                <span class="price">99 kr</span>
             </li>
             <li>
-                <span>Kärleksspread (relation / känslor)</span>
-                <span>149 kr</span>
+                <span>Kärleksspread – relation & känslor</span>
+                <span class="price">149 kr</span>
             </li>
             <li>
                 <span>Djup reading – 7 kort</span>
-                <span>299 kr</span>
+                <span class="price">299 kr</span>
             </li>
         </ul>
         <p>
-            Leverans: skriftlig tolkning i text, normalt inom 24 timmar efter genomförd betalning.
+            Leverans: skriftlig tolkning i text, normalt inom 24 timmar efter att betalning kommit in.
         </p>
     </section>
 
-    <section class="card">
-        <h3>Så här går det till</h3>
-        <ol>
-            <li>Du skickar ett meddelande till mig med:
-                <ul>
-                    <li>Förnamn eller smeknamn</li>
-                    <li>Vilken tjänst du vill ha</li>
-                    <li>Din fråga eller situation (så konkret du vill)</li>
-                </ul>
-            </li>
-            <li>Du betalar via Swish eller PayPal (se nedan).</li>
-            <li>Jag drar korten, fotar om du vill, och skriver en tydlig tolkning.</li>
-            <li>Du får din läsning i textform.</li>
-        </ol>
-    </section>
+    <section class="card layout-two">
+        <div>
+            <h2>Så går en läsning till</h2>
+            <ol>
+                <li>Du skickar ett mail till mig (se nedan) med:
+                    <ul>
+                        <li>Förnamn eller smeknamn</li>
+                        <li>Vilken tjänst du vill ha</li>
+                        <li>Din fråga eller situation, så konkret du vill</li>
+                    </ul>
+                </li>
+                <li>Du betalar via Swish.</li>
+                <li>Jag drar korten, dokumenterar läggningen och skriver din tolkning.</li>
+                <li>Du får allt i ett samlat svar i text.</li>
+            </ol>
+            <p>
+                Du kan ställa följdfrågor på samma tema om något är oklart i tolkningen.
+            </p>
+        </div>
 
-    <section class="card">
-        <h3>Betalning</h3>
-        <p>
-            Just nu kan du betala via:
-        </p>
-        <ul>
-            <li><strong>Swish:</strong> <span class="highlight">0735-928005</span></li>
-            <li><strong>PayPal:</strong> <span class="highlight">DIN-PAYPAL.ME-LÄNK-HÄR</span></li>
-            <li><strong>Tradera:</strong> Vid behov kan jag lägga upp en annons för dig 
-                om du föredrar betalning via Tradera.
-            </li>
-        </ul>
-        <p>
-            Märk betalningen med ditt namn + vilken tjänst du valt 
-            (exempel: “Anna – 3 kort”).
-        </p>
-    </section>
-
-    <section class="card">
-        <h3>Kontakt</h3>
-        <p>
-            För bokning och frågor:
-        </p>
-        <ul>
-            <li>E-post: <span class="highlight">wolaninbydawn@gmail.com</span></li>
-          <li>Kontakt sker endast via e-post</li>
-
-        </ul>
-        <div class="cta-box">
-            <a href="mailto:wolaninbydawn@gmail.com?subject=Bokning tarotläsning" class="btn">
-                Boka tarotläsning via mail
-            </a>
+        <div>
+            <h2>Betalning</h2>
+            <p>
+                <span class="inline-label">Swish:</span>
+                <span class="highlight">0735928005</span>
+            </p>
+            <p>
+                Märk betalningen med ditt namn + vald tjänst, t.ex. 
+                <span class="highlight">“Anna – 3 kort”</span>.
+            </p>
+            <p>
+                Om du behöver annan lösning (t.ex. via Tradera-auktion) kan jag ordna det efter överenskommelse.
+            </p>
         </div>
     </section>
 
     <section class="card">
-        <h3>Viktigt</h3>
-        <p style="font-size: 0.85rem; opacity: 0.9;">
+        <h2>Boka tarotläsning</h2>
+        <p>
+            Skicka ett mail och skriv vilken tjänst du vill ha samt din fråga/situation.
+        </p>
+        <p>
+            <span class="inline-label">E-post:</span>
+            <span class="highlight">wolaninbydawn@gmail.com</span>
+        </p>
+        <div class="cta-stack">
+            <a href="mailto:wolaninbydawn@gmail.com?subject=Bokning tarotläsning" class="btn-primary">
+                Boka tarotläsning via mail
+            </a>
+            <a href="mailto:wolaninbydawn@gmail.com?subject=Fråga om tarot" class="btn-ghost">
+                Ställ en fråga innan du bokar
+            </a>
+        </div>
+        <small>
+            Genom att maila mig godkänner du att jag svarar dig via e-post och behandlar din fråga för att kunna göra din läsning.
+        </small>
+    </section>
+
+    <section class="card">
+        <h2>Viktigt att veta</h2>
+        <p>
             Tarot är intuitiv vägledning för reflektion. 
-            Inga garantier ges och tjänsten ersätter inte medicinsk, juridisk eller psykologisk rådgivning.
-            Om du mår akut psykiskt dåligt ska du alltid kontakta vården eller larmnummer i första hand.
+            Jag ger inga garantier och ersätter inte medicinsk, juridisk eller psykologisk rådgivning.
+        </p>
+        <p>
+            Om du mår akut psykiskt dåligt ska du alltid vända dig till vården eller larmnummer i första hand.
         </p>
     </section>
 
